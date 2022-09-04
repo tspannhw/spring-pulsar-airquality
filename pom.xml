@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>dev.datainmotion.airquality</groupId>
+	<artifactId>airquality</artifactId>
+	<version>2.0.0</version>
+	<name>airquality</name>
+	<description>spring-pulsar-airquality: Demo project for Spring Boot with Spring Pulsar</description>
+	<properties>
+		<java.version>17</java.version>
+		<pulsar.version>2.10.1</pulsar.version>
+	</properties>
+	<repositories>
+
+  <repository>
+      <id>springpulsarlocal</id>
+      <name>Spring Local Repository</name>
+      <url>file:///Users/tspann/.m2/repository</url>
+    </repository>
+	</repositories>
+	<dependencies>
+
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.github.ben-manes.caffeine</groupId>
+    <artifactId>caffeine</artifactId>
+</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+              <dependency>
+                        <groupId>org.springframework.pulsar</groupId>
+                        <artifactId>spring-pulsar</artifactId>
+                        <version>0.1.0-SNAPSHOT</version>
+			<scope>system</scope>
+    <systemPath>/Users/tspann/.m2/repository/org/springframework/pulsar/spring-pulsar/0.1.0-SNAPSHOT/spring-pulsar-0.1.0-SNAPSHOT.jar</systemPath>
+                </dependency>
+        <dependency>
+                        <groupId>org.springframework.pulsar</groupId>
+                        <artifactId>spring-pulsar-spring-boot-starter</artifactId>
+                        <version>0.1.0-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>/Users/tspann/.m2/repository/org/springframework/pulsar/spring-pulsar-spring-boot-starter/0.1.0-SNAPSHOT/spring-pulsar-spring-boot-starter-0.1.0-SNAPSHOT.jar</systemPath>
+                </dependency>
+
+		<dependency>
+			<groupId>org.springframework.pulsar</groupId>
+			<artifactId>spring-pulsar-spring-boot-autoconfigure</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+                        <scope>system</scope>
+			<systemPath>/Users/tspann/.m2/repository/org/springframework/pulsar/spring-pulsar-spring-boot-autoconfigure/0.1.0-SNAPSHOT/spring-pulsar-spring-boot-autoconfigure-0.1.0-SNAPSHOT.jar</systemPath>
+			</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+	 <!-- Pulsar -->
+		 <dependency>
+			<groupId>org.apache.pulsar</groupId>
+			<artifactId>pulsar-client</artifactId>
+			<version>${pulsar.version}</version>
+			  </dependency>
+
+					  <dependency>
+					  <groupId>org.apache.pulsar</groupId>
+					  <artifactId>pulsar-client-admin</artifactId>
+					  <version>${pulsar.version}</version>
+				  </dependency>
+				  <dependency>
+					  <groupId>org.apache.pulsar</groupId>
+					  <artifactId>pulsar-client-original</artifactId>
+					  <version>${pulsar.version}</version>
+					  <type>pom</type>
+				  </dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-messaging</artifactId>
+</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+  <configuration>
+    <includeSystemScope>true</includeSystemScope>
+  </configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
