@@ -11,7 +11,8 @@ For now you have to do a gradle install to maven repo to get access to the libra
 
 ### Setup
 
-* Visual Code with Spring & Java 17
+* Visual Code with Spring Boot 2.72. & Java 17
+* Apache Pulsar Version 2.10.1 works with 2.9.1+
 * Set an environment variable with your api key code from airnow
 * Point to your Apache Pulsar cluster, if you are using StreamNative cloud I have SSL and configuration in the config class
 
