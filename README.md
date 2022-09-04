@@ -1,30 +1,22 @@
-## airquality
+## spring-pulsar-airquality
 
-Example code for Spring IO 2022 Barcelona, Spain
 
 Timothy Spann
 
+### New Spring Module for Apache Pulsar
+
+This uses https://github.com/spring-projects-experimental/spring-pulsar
+
+For now you have to do a gradle install to maven repo to get access to the libraries.
+
 ### Setup
 
-* Visual Code with Spring & Java 11
+* Visual Code with Spring & Java 17
 * Set an environment variable with your api key code from airnow
 * Point to your Apache Pulsar cluster, if you are using StreamNative cloud I have SSL and configuration in the config class
 
-### src/main/resources/application.resources
+### src/main/resources/application.yml
 
-````
-airnowapi.url=${AIRPORTNOWAPIURL}
-topic.name=persistent://public/default/airquality
-producer.name=airquality
-send.timeout=60
-security.mode=on
-#off
-#pulsar.service.url=pulsar://pulsar1:6650
-pulsar.service.url=pulsar+ssl://demo.demo.snio.cloud:6651
-pulsar.oauth2.audience=urn:sn:pulsar:demo:demo-cluster
-pulsar.oauth2.credentials-url=file:///Users/tspann/Downloads/sndemo-tspann.json
-pulsar.oauth2.issuer-url=https://auth.streamnative.cloud/
-````
 
 ### Spark Run
 
@@ -246,7 +238,7 @@ key:[7a7f567a-b9d7-470e-992e-86a2c24c9ce8], properties:[], content:{"dateObserve
 
 ### CVE Note
 
-We are using Spring Boot 2.7.0 which does not have this issue.
+We are using Spring Boot 2.7.2 which does not have this issue.
 
 https://thenewstack.io/springshell-brings-hell-to-java-developers/
 
