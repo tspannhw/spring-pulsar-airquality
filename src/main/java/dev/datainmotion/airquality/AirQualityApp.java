@@ -4,6 +4,7 @@ import dev.datainmotion.airquality.model.Observation;
 import dev.datainmotion.airquality.service.AirQualityService;
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.Schema;
+import org.apache.pulsar.common.schema.SchemaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.pulsar.annotation.PulsarListener;
 import org.springframework.pulsar.core.PulsarProducerFactory;
 import org.springframework.pulsar.core.PulsarTemplate;
+import org.springframework.pulsar.config.*;
+import org.springframework.pulsar.listener.Acknowledgement;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -42,13 +46,12 @@ public class AirQualityApp implements CommandLineRunner {
     }
 
     @Autowired
-    private PulsarProducerFactory<Observation> producerFactory;
+    private PulsarTemplate<Observation> pulsarTemplate;
 
     /**
      * get rows
      */
     private void getRows() {
-        PulsarTemplate<Observation> pulsarTemplate = new PulsarTemplate<>(producerFactory);
         pulsarTemplate.setSchema(Schema.JSON(Observation.class));
         List<Observation> obsList = airQualityService.fetchCurrentObservation();
 
