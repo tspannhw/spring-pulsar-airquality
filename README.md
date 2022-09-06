@@ -7,8 +7,6 @@ Timothy Spann
 
 This uses https://github.com/spring-projects-experimental/spring-pulsar
 
-For now you have to do a gradle install to maven repo to get access to the libraries.
-
 ### Setup
 
 * Visual Code with Spring Boot 2.72. & Java 17
@@ -243,5 +241,3 @@ key:[7a7f567a-b9d7-470e-992e-86a2c24c9ce8], properties:[], content:{"dateObserve
 We are using Spring Boot 2.7.2 which does not have this issue.
 
 https://thenewstack.io/springshell-brings-hell-to-java-developers/
-
-
