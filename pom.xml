@@ -19,14 +19,14 @@
 	</properties>
 	<repositories>
 
-  <repository>
-      <id>springpulsarlocal</id>
-      <name>Spring Local Repository</name>
-      <url>file:///Users/tspann/.m2/repository</url>
+    <repository> 
+        <id>repository.spring.snapshot</id> 
+        <name>Spring Snapshot Repository</name> 
+        <url>http://repo.spring.io/snapshot</url> 
     </repository>
-	</repositories>
-	<dependencies>
 
+</repositories>
+	<dependencies>
 
 <dependency>
     <groupId>org.springframework.boot</groupId>
