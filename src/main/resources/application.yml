@@ -1,21 +1,45 @@
+
+spring:
+  pulsar:
+#    client:
+#      service-url: pulsar://pulsar1:6650
+    producer:
+      batching-enabled: false
+      send-timeout-ms: 90000
+      producer-name: airqualityjava
+      topic-name: persistent://public/default/airquality
+
+airnowapi:
+  base-url: https://www.airnowapi.org
+  airquality-uri: /aq/observation/zipCode/current/?format=application/json&distance=250&zipCode={zipCode}&API_KEY={apiKey}
+  api-key: ${API_KEY:}
+  zip-codes:
+    - 08520
+    - 94027
+    - 02199
+    - 11962
+    - 94957
+    - 90402
+    - 94301
+    - 07070
+    - 90265
+    - 90272
+    - 10013
+    - 10007
+    - 94123
+    - 77449
+    - 11368
+    - 60629
+    - 79936
+    - 75034
+    - 94016
+    - 79936
+
 logging:
   level:
     org.apache.pulsar: error
     root: info
     ROOT: info
     dev.datainmotion.airquality: info
-spring:
-  pulsar:
-    client:
-          service-url: pulsar://pulsar1:6650
-    producer:
-          batching-enabled: false
-          send-timeout-ms: 90000
-          producer-name: airqualityjava
-          topic-name: persistent://public/default/airquality
-airnowapi.api.key: ${API_KEY}
-airnowapi.url: https://www.airnowapi.org/aq/observation/zipCode/current
-airnowapi.uri: /?format=application/json&distance=250&zipCode=
-airnowapi.key.name: &API_KEY=
-zipcodes: 08520,94027,02199,11962,94957,90402,94301,07070,90265,90272,10013,10007,94123,77449,11368,60629,79936,75034,94016,79936
+
 server.port: 8999
