@@ -16,6 +16,67 @@ This uses https://github.com/spring-projects-experimental/spring-pulsar
 
 ### src/main/resources/application.yml
 
+````
+
+spring:
+  pulsar:
+    client:
+      service-url: pulsar://pulsar1:6650
+    administration:
+      service-url: http://pulsar1:8080
+    producer:
+      batching-enabled: false
+      send-timeout-ms: 90000
+      producer-name: airqualityjava
+      topic-name: persistent://public/default/airquality
+logging:
+  level:
+    org.apache.pulsar: error
+    root: info
+    ROOT: info
+    dev.datainmotion.airquality: debug
+
+server.port: 8999      
+````
+
+### App Run
+
+````
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::       (v3.0.0-SNAPSHOT)
+
+2022-09-07T09:39:10.510-04:00  INFO 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : Starting AirQualityApp using Java 17.0.4.1 on Timothys-MBP.fios-router.home with PID 29213 (/Users/tspann/Documents/code/springpulsar/airquality/spring-pulsar-airquality/target/classes started by tspann in /Users/tspann/Documents/code/springpulsar/airquality/spring-pulsar-airquality)
+2022-09-07T09:39:10.513-04:00 DEBUG 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : Running with Spring Boot v3.0.0-SNAPSHOT, Spring v6.0.0-SNAPSHOT
+2022-09-07T09:39:10.515-04:00  INFO 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : No active profile set, falling back to 1 default profile: "default"
+2022-09-07T09:39:13.461-04:00  INFO 29213 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8999
+2022-09-07T09:39:13.476-04:00  INFO 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : Started AirQualityApp in 3.447 seconds (process running for 3.855)
+2022-09-07T09:39:17.037-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Count: 3
+2022-09-07T09:39:17.038-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : O3=20 for NY New York City Region
+2022-09-07T09:39:17.136-04:00  WARN 29213 --- [   scheduling-1] c.s.circe.checksum.Crc32cIntChecksum     : Failed to load Circe JNI library. Falling back to Java based CRC32c provider
+2022-09-07T09:39:17.145-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Sent dev.datainmotion.airquality.model.Observation@2b7252cf[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=O3,aqi=20,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
+2022-09-07T09:39:17.145-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Pulsar MsgID 120005:0:-1
+2022-09-07T09:39:17.145-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : PM2.5=18 for NY New York City Region
+2022-09-07T09:39:17.170-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Sent dev.datainmotion.airquality.model.Observation@56b810b0[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM2.5,aqi=18,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
+2022-09-07T09:39:17.171-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Pulsar MsgID 121137:0:-1
+2022-09-07T09:39:17.171-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : PM10=8 for NY New York City Region
+2022-09-07T09:39:17.174-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Sent dev.datainmotion.airquality.model.Observation@65e4e949[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM10,aqi=8,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
+2022-09-07T09:39:17.175-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Pulsar MsgID 121137:1:-1
+2022-09-07T09:39:17.200-04:00  INFO 29213 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : Ozone Message received: dev.datainmotion.airquality.model.Observation@5fd5afb6[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=O3,aqi=20,category=<null>,additionalProperties={}]
+2022-09-07T09:39:17.271-04:00  INFO 29213 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : PM10 Message received: dev.datainmotion.airquality.model.Observation@489a843d[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM10,aqi=8,category=<null>,additionalProperties={}]
+2022-09-07T09:39:17.271-04:00  INFO 29213 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : PM2.5 Message received: dev.datainmotion.airquality.model.Observation@5adab18e[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM2.5,aqi=18,category=<null>,additionalProperties={}]
+^C2022-09-07T09:39:22.833-04:00  INFO 29213 --- [ionShutdownHook] o.s.p.config.PulsarClientFactoryBean     : Closing client org.apache.pulsar.client.impl.PulsarClientImpl@16cf4762
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.224 s
+[INFO] Finished at: 2022-09-07T09:39:27-04:00
+[INFO] ------------------------------------------------------------------------
+````
 
 ### Spark Run
 
