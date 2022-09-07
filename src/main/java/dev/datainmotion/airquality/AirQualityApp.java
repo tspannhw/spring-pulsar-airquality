@@ -45,10 +45,10 @@ public class AirQualityApp {
         SpringApplication.run(AirQualityApp.class, args);
     }
 
-	@Bean
-	public PulsarTopic newTopic(PulsarProperties pulsarProperties) {
-		return PulsarTopic.builder(pulsarProperties.getProducer().getTopicName()).build();
-	}
+//	@Bean
+//	public PulsarTopic newTopic(PulsarProperties pulsarProperties) {
+//		return PulsarTopic.builder(pulsarProperties.getProducer().getTopicName()).build();
+//	}
 
 	@Scheduled(initialDelay = 3000, fixedRate = 300000)
     public void getRows() {
