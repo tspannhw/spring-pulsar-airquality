@@ -50,11 +50,12 @@ public class AirQualityApp {
 		return PulsarTopic.builder(pulsarProperties.getProducer().getTopicName()).build();
 	}
 
-	@Scheduled(initialDelay = 2000, fixedRate = 2000)
+	@Scheduled(initialDelay = 3000, fixedRate = 300000)
     public void getRows() {
 		this.pulsarTemplate.setSchema(Schema.JSON(Observation.class));
 		List<Observation> observations = airQualityService.fetchCurrentObservation();
         if (observations == null || observations.size() <= 0) {
+			System.out.println("list:"+ observations.size());
             return;
         }
         log.debug("Count: {}", observations.size());
@@ -70,16 +71,27 @@ public class AirQualityApp {
 						.withMessageCustomizer((mb) -> mb.key(uuidKey.toString()))
 						.send();
 				log.info("Sent {}", observation);
-				log.debug("PULSAR MSGID {}", msgid.toString());
+				log.debug("Pulsar MsgID {}", msgid.toString());
 			}
 			catch (Throwable e) {
+				e.printStackTrace();
 				log.error("Pulsar Error", e);
 			}
 		});
     }
 
-	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = "shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/airquality")
+	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = "shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
 	void echoObservation(Observation message) {
-		this.log.info("Message received: {}", message);
+		this.log.info("PM2.5 Message received: {}", message);
+	}
+
+	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = "shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
+	void echoObservation2(Observation message) {
+		this.log.info("PM10 Message received: {}", message);
+	}
+
+	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = "shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
+	void echoObservation3(Observation message) {
+		this.log.info("Ozone Message received: {}", message);
 	}
 }

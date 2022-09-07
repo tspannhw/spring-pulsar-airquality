@@ -42,6 +42,6 @@ logging:
     org.apache.pulsar: error
     root: info
     ROOT: info
-    dev.datainmotion.airquality: info
+    dev.datainmotion.airquality: debug
 
 server.port: 8999
