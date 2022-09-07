@@ -9,7 +9,7 @@ This uses https://github.com/spring-projects-experimental/spring-pulsar
 
 ### Setup
 
-* Visual Code with Spring Boot 2.72. & Java 17
+* Visual Code with Spring Boot 3.0.0. & Java 17
 * Apache Pulsar Version 2.10.1 works with 2.9.1+
 * Set an environment variable with your api key code from airnow
 * Point to your Apache Pulsar cluster, if you are using StreamNative cloud I have SSL and configuration in the config class
