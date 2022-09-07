@@ -55,7 +55,6 @@ public class AirQualityApp {
 		this.pulsarTemplate.setSchema(Schema.JSON(Observation.class));
 		List<Observation> observations = airQualityService.fetchCurrentObservation();
         if (observations == null || observations.size() <= 0) {
-			System.out.println("list:"+ observations.size());
             return;
         }
         log.debug("Count: {}", observations.size());
