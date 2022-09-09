@@ -44,12 +44,7 @@ public class AirQualityApp {
     public static void main(String[] args) {
         SpringApplication.run(AirQualityApp.class, args);
     }
-
-//	@Bean
-//	public PulsarTopic newTopic(PulsarProperties pulsarProperties) {
-//		return PulsarTopic.builder(pulsarProperties.getProducer().getTopicName()).build();
-//	}
-
+	
 	@Scheduled(initialDelay = 3000, fixedRate = 300000)
     public void getRows() {
 		this.pulsarTemplate.setSchema(Schema.JSON(Observation.class));
