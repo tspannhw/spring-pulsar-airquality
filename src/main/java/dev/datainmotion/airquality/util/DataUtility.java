@@ -3,13 +3,17 @@ package dev.datainmotion.airquality.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.datainmotion.airquality.model.Observation;
+import dev.datainmotion.airquality.service.AirQualityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Locale;
 
 /**
  *
  */
 public class DataUtility {
-
+    private static final Logger log = LoggerFactory.getLogger(DataUtility.class);
     /**
      * build json output
      * @param  observation   observation as an object
@@ -23,7 +27,7 @@ public class DataUtility {
                 jsonValue = mapper.writeValueAsString(observation);
             }
         } catch (Throwable t) {
-            t.printStackTrace();
+            log.error("serializer error", t);
         }
         return jsonValue;
     }
@@ -42,7 +46,7 @@ public class DataUtility {
         try {
             json = mapper.writeValueAsString(observation);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("json error", e);
         }
         if ( json == null) {
             json = "{}";

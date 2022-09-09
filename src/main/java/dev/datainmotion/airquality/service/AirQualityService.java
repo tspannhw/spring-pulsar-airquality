@@ -22,7 +22,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 @EnableConfigurationProperties(AirQualityProperties.class)
 public class AirQualityService {
-
 	private static final Logger log = LoggerFactory.getLogger(AirQualityService.class);
 
 	private final WebClient webClient;
@@ -43,7 +42,7 @@ public class AirQualityService {
      */
     public List<Observation> fetchCurrentObservation() {
 		/*
-		 If you want to pull the web out of the equation use this hardcoded return below instead
+		 If you want to pull the web out of the equation use this hardcoded return below instead for testing.
 		Observation o1 = new Observation();
 		o1.setAqi(5);
 		o1.setParameterName("thingy");
