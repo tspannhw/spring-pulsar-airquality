@@ -6,18 +6,19 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.0-M4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.datainmotion.airquality</groupId>
 	<artifactId>airquality</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 	<name>airquality</name>
 	<description>spring-pulsar-airquality: Air Quality Spring Boot with Spring Pulsar
 	</description>
 	<properties>
 		<java.version>17</java.version>
 		<pulsar.version>2.10.1</pulsar.version>
+                <spring-pulsar.version>0.1.0-M1</spring-pulsar.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -1,8 +1,13 @@
 spring:
     pulsar:
       client:
-#        service-url: pulsar+ssl://sn-academy.sndevadvocate.snio.cloud:6651
-        service-url: pulsar://pulsar1:6650
+        service-url: pulsar+ssl://sn-academy.sndevadvocate.snio.cloud:6651
+        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
+        authentication:
+          issuer-url: https://auth.streamnative.cloud/
+          private-key: file:///Users/tspann/Downloads/sndevadvocate-tspann.json
+          audience: urn:sn:pulsar:sndevadvocate:my-instance
+##        service-url: pulsar://pulsar1:6650
 #        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
 #        auth-params: "{\"privateKey\":\"file:///Users/tspann/Downloads/sndevadvocate-tspann.json\",\"issuerUrl\":\"https://auth.streamnative.cloud/\", \"audience\":\"urn:sn:pulsar:sndevadvocate:my-instance\"}"
       producer:
