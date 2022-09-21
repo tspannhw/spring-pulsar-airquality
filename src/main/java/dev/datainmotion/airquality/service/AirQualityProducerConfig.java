@@ -56,7 +56,7 @@ public class AirQualityProducerConfig {
                         schemaName = schemaValue.getSchemaInfo().getSchemaDefinition().toString();
                     }
                 } catch (Exception e) {
-                   log.error(e.getLocalizedMessage());
+                   log.error("Schema Parsing Error", e);
                 }
 
             }

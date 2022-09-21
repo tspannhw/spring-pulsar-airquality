@@ -9,7 +9,7 @@ This uses https://github.com/spring-projects-experimental/spring-pulsar
 
 ### Setup
 
-* Visual Code with Spring Boot 3.0.0. & Java 17
+* Visual Code with Spring Boot v3.0.0-M4 & Java 17.0.4.1
 * Apache Pulsar Version 2.10.1 works with 2.9.1+
 * Set an environment variable with your api key code from airnow
 * Point to your Apache Pulsar cluster, if you are using StreamNative cloud I have SSL and configuration in the config class
@@ -19,63 +19,55 @@ This uses https://github.com/spring-projects-experimental/spring-pulsar
 ````
 
 spring:
-  pulsar:
-    client:
-      service-url: pulsar://pulsar1:6650
-    administration:
-      service-url: http://pulsar1:8080
-    producer:
-      batching-enabled: false
-      send-timeout-ms: 90000
-      producer-name: airqualityjava
-      topic-name: persistent://public/default/airquality
+    pulsar:
+      client:
+#        service-url: pulsar+ssl://sn-academy.sndevadvocate.snio.cloud:6651
+#        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
+#        authentication:
+#          issuer-url: https://auth.streamnative.cloud/
+#          private-key: file:///Users/tspann/Downloads/sndevadvocate-tspann.json
+#          audience: urn:sn:pulsar:sndevadvocate:my-instance
+        service-url: pulsar://pulsar1:6650
+      producer:
+        batching-enabled: false
+        send-timeout-ms: 90000
+        producer-name: airqualityspringboot
+        topic-name: persistent://public/default/airquality
+
 logging:
   level:
     org.apache.pulsar: error
     root: info
     ROOT: info
-    dev.datainmotion.airquality: debug
+    dev.datainmotion.airquality: info
 
-server.port: 8999      
+server.port: 8799   
 ````
 
 ### App Run
 
 ````
+
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::       (v3.0.0-SNAPSHOT)
+ :: Spring Boot ::             (v3.0.0-M4)
 
-2022-09-07T09:39:10.510-04:00  INFO 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : Starting AirQualityApp using Java 17.0.4.1 on Timothys-MBP.fios-router.home with PID 29213 (/Users/tspann/Documents/code/springpulsar/airquality/spring-pulsar-airquality/target/classes started by tspann in /Users/tspann/Documents/code/springpulsar/airquality/spring-pulsar-airquality)
-2022-09-07T09:39:10.513-04:00 DEBUG 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : Running with Spring Boot v3.0.0-SNAPSHOT, Spring v6.0.0-SNAPSHOT
-2022-09-07T09:39:10.515-04:00  INFO 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : No active profile set, falling back to 1 default profile: "default"
-2022-09-07T09:39:13.461-04:00  INFO 29213 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8999
-2022-09-07T09:39:13.476-04:00  INFO 29213 --- [           main] d.datainmotion.airquality.AirQualityApp  : Started AirQualityApp in 3.447 seconds (process running for 3.855)
-2022-09-07T09:39:17.037-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Count: 3
-2022-09-07T09:39:17.038-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : O3=20 for NY New York City Region
-2022-09-07T09:39:17.136-04:00  WARN 29213 --- [   scheduling-1] c.s.circe.checksum.Crc32cIntChecksum     : Failed to load Circe JNI library. Falling back to Java based CRC32c provider
-2022-09-07T09:39:17.145-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Sent dev.datainmotion.airquality.model.Observation@2b7252cf[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=O3,aqi=20,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
-2022-09-07T09:39:17.145-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Pulsar MsgID 120005:0:-1
-2022-09-07T09:39:17.145-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : PM2.5=18 for NY New York City Region
-2022-09-07T09:39:17.170-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Sent dev.datainmotion.airquality.model.Observation@56b810b0[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM2.5,aqi=18,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
-2022-09-07T09:39:17.171-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Pulsar MsgID 121137:0:-1
-2022-09-07T09:39:17.171-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : PM10=8 for NY New York City Region
-2022-09-07T09:39:17.174-04:00  INFO 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Sent dev.datainmotion.airquality.model.Observation@65e4e949[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM10,aqi=8,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
-2022-09-07T09:39:17.175-04:00 DEBUG 29213 --- [   scheduling-1] d.datainmotion.airquality.AirQualityApp  : Pulsar MsgID 121137:1:-1
-2022-09-07T09:39:17.200-04:00  INFO 29213 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : Ozone Message received: dev.datainmotion.airquality.model.Observation@5fd5afb6[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=O3,aqi=20,category=<null>,additionalProperties={}]
-2022-09-07T09:39:17.271-04:00  INFO 29213 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : PM10 Message received: dev.datainmotion.airquality.model.Observation@489a843d[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM10,aqi=8,category=<null>,additionalProperties={}]
-2022-09-07T09:39:17.271-04:00  INFO 29213 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : PM2.5 Message received: dev.datainmotion.airquality.model.Observation@5adab18e[dateObserved=2022-09-07 ,hourObserved=8,localTimeZone=EST,reportingArea=New York City Region,stateCode=NY,latitude=40.8419,longitude=-73.8359,parameterName=PM2.5,aqi=18,category=<null>,additionalProperties={}]
-^C2022-09-07T09:39:22.833-04:00  INFO 29213 --- [ionShutdownHook] o.s.p.config.PulsarClientFactoryBean     : Closing client org.apache.pulsar.client.impl.PulsarClientImpl@16cf4762
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  20.224 s
-[INFO] Finished at: 2022-09-07T09:39:27-04:00
-[INFO] ------------------------------------------------------------------------
+2022-09-21T13:52:09.450-04:00  INFO 24479 --- [           main] d.datainmotion.airquality.AirQualityApp  : Starting AirQualityApp using Java 17.0.4.1 on Timothys-MBP.fios-router.home with PID 24479 (/Users/tspann/Documents/code/springpulsar/airquality/spring-pulsar-airquality/target/classes started by tspann in /Users/tspann/Documents/code/springpulsar/airquality/spring-pulsar-airquality)
+2022-09-21T13:52:09.456-04:00  INFO 24479 --- [           main] d.datainmotion.airquality.AirQualityApp  : No active profile set, falling back to 1 default profile: "default"
+2022-09-21T13:52:12.134-04:00  INFO 24479 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8799
+2022-09-21T13:52:12.169-04:00  INFO 24479 --- [           main] d.datainmotion.airquality.AirQualityApp  : Started AirQualityApp in 3.233 seconds (process running for 3.704)
+2022-09-21T13:52:12.954-04:00  WARN 24479 --- [   scheduling-1] c.s.circe.checksum.Crc32cIntChecksum     : Failed to load Circe JNI library. Falling back to Java based CRC32c provider
+2022-09-21T13:52:12.973-04:00  INFO 24479 --- [r-client-io-1-1] QualityProducerConfig$LoggingInterceptor : Producer: airqualityspringboot, MessageId: 152902:0:-1, Key: b3f0e5b1-eca1-4fd4-907e-9337015fec82, Pub Time: 1663782732947, Schema: {"type":"record","name":"Observation","namespace":"dev.datainmotion.airquality.model","fields":[{"name":"additionalProperties","type":["null",{"type":"map","values":{"type":"record","name":"Object","namespace":"java.lang","fields":[]}}],"default":null},{"name":"aqi","type":["null","int"],"default":null},{"name":"category","type":["null",{"type":"record","name":"Category","fields":[{"name":"additionalProperties","type":["null",{"type":"map","values":"java.lang.Object"}],"default":null},{"name":"name","type":["null","string"],"default":null},{"name":"number","type":["null","int"],"default":null}]}],"default":null},{"name":"dateObserved","type":["null","string"],"default":null},{"name":"hourObserved","type":["null","int"],"default":null},{"name":"latitude","type":["null","double"],"default":null},{"name":"localTimeZone","type":["null","string"],"default":null},{"name":"longitude","type":["null","double"],"default":null},{"name":"parameterName","type":["null","string"],"default":null},{"name":"reportingArea","type":["null","string"],"default":null},{"name":"stateCode","type":["null","string"],"default":null}]}, Value: dev.datainmotion.airquality.model.Observation@5b63c693[dateObserved=2022-09-21 ,hourObserved=12,localTimeZone=EST,reportingArea=Boston,stateCode=MA,latitude=42.351,longitude=-71.051,parameterName=O3,aqi=17,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
+spring:
+2022-09-21T13:52:13.013-04:00  INFO 24479 --- [r-client-io-1-1] QualityProducerConfig$LoggingInterceptor : Producer: airqualityspringboot, MessageId: 154625:0:-1, Key: 491dd3d2-7c91-45e8-91fa-7ba9f65c7dd5, Pub Time: 1663782733001, Schema: {"type":"record","name":"Observation","namespace":"dev.datainmotion.airquality.model","fields":[{"name":"additionalProperties","type":["null",{"type":"map","values":{"type":"record","name":"Object","namespace":"java.lang","fields":[]}}],"default":null},{"name":"aqi","type":["null","int"],"default":null},{"name":"category","type":["null",{"type":"record","name":"Category","fields":[{"name":"additionalProperties","type":["null",{"type":"map","values":"java.lang.Object"}],"default":null},{"name":"name","type":["null","string"],"default":null},{"name":"number","type":["null","int"],"default":null}]}],"default":null},{"name":"dateObserved","type":["null","string"],"default":null},{"name":"hourObserved","type":["null","int"],"default":null},{"name":"latitude","type":["null","double"],"default":null},{"name":"localTimeZone","type":["null","string"],"default":null},{"name":"longitude","type":["null","double"],"default":null},{"name":"parameterName","type":["null","string"],"default":null},{"name":"reportingArea","type":["null","string"],"default":null},{"name":"stateCode","type":["null","string"],"default":null}]}, Value: dev.datainmotion.airquality.model.Observation@43aad2e5[dateObserved=2022-09-21 ,hourObserved=12,localTimeZone=EST,reportingArea=Boston,stateCode=MA,latitude=42.351,longitude=-71.051,parameterName=PM2.5,aqi=14,category=Category[number=1, name='Good', additionalProperties={}],additionalProperties={}]
+2022-09-21T13:52:13.051-04:00  INFO 24479 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : PM2.5 Message received: dev.datainmotion.airquality.model.Observation@3ed28ab5[dateObserved=2022-09-21 ,hourObserved=12,localTimeZone=EST,reportingArea=Boston,stateCode=MA,latitude=42.351,longitude=-71.051,parameterName=PM2.5,aqi=14,category=<null>,additionalProperties={}]
+2022-09-21T13:52:13.094-04:00  INFO 24479 --- [ng-reader-0-C-1] d.datainmotion.airquality.AirQualityApp  : Ozone Message received: dev.datainmotion.airquality.model.Observation@198c9943[dateObserved=2022-09-21 ,hourObserved=12,localTimeZone=EST,reportingArea=Boston,stateCode=MA,latitude=42.351,longitude=-71.051,parameterName=O3,aqi=17,category=<null>,additionalProperties={}]
+^C2022-09-21T13:52:15.893-04:00  INFO 24479 --- [ionShutdownHook] o.s.p.config.PulsarClientFactoryBean     : Closing client org.apache.pulsar.client.impl.PulsarClientImpl@50551c4a
+
 ````
 
 ### Spark Run
@@ -297,8 +289,3 @@ key:[7a7f567a-b9d7-470e-992e-86a2c24c9ce8], properties:[], content:{"dateObserve
 
 * https://github.com/tspannhw/FLiPN-AirQuality-REST
 
-### CVE Note
-
-We are using Spring Boot 2.7.2 which does not have this issue.
-
-https://thenewstack.io/springshell-brings-hell-to-java-developers/
