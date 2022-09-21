@@ -1,19 +1,17 @@
 spring:
     pulsar:
       client:
-        service-url: pulsar+ssl://sn-academy.sndevadvocate.snio.cloud:6651
-        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
-        authentication:
-          issuer-url: https://auth.streamnative.cloud/
-          private-key: file:///Users/tspann/Downloads/sndevadvocate-tspann.json
-          audience: urn:sn:pulsar:sndevadvocate:my-instance
-##        service-url: pulsar://pulsar1:6650
+#        service-url: pulsar+ssl://sn-academy.sndevadvocate.snio.cloud:6651
 #        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
-#        auth-params: "{\"privateKey\":\"file:///Users/tspann/Downloads/sndevadvocate-tspann.json\",\"issuerUrl\":\"https://auth.streamnative.cloud/\", \"audience\":\"urn:sn:pulsar:sndevadvocate:my-instance\"}"
+#        authentication:
+#          issuer-url: https://auth.streamnative.cloud/
+#          private-key: file:///Users/tspann/Downloads/sndevadvocate-tspann.json
+#          audience: urn:sn:pulsar:sndevadvocate:my-instance
+        service-url: pulsar://pulsar1:6650
       producer:
         batching-enabled: false
         send-timeout-ms: 90000
-        producer-name: airqualityjava
+        producer-name: airqualityspringboot
         topic-name: persistent://public/default/airquality
 
 airnowapi:
@@ -34,9 +32,12 @@ airnowapi:
     - 10013
     - 10007
     - 94123
+    - 10001
     - 77449
     - 11368
     - 60629
+    - 19019
+    -
     - 79936
     - 75034
     - 94016
@@ -47,6 +48,6 @@ logging:
     org.apache.pulsar: error
     root: info
     ROOT: info
-    dev.datainmotion.airquality: debug
+    dev.datainmotion.airquality: info
 
-server.port: 8999
+server.port: 8799

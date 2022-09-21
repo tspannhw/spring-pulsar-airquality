@@ -59,7 +59,7 @@ public class AirQualityApp {
         }
         log.debug("Count: {}", observations.size());
 		observations.forEach((observation) -> {
-			log.info("{}={} for {} {}",
+			log.debug("{}={} for {} {}",
 					observation.getParameterName(),
 					observation.getAqi(),
 					observation.getStateCode(),
@@ -69,7 +69,7 @@ public class AirQualityApp {
 				MessageId msgid = pulsarTemplate.newMessage(observation)
 						.withMessageCustomizer((mb) -> mb.key(uuidKey.toString()))
 						.send();
-				log.info("Sent {} msgid:{}", observation, msgid.toString());
+				log.debug("MSGID Sent: {}", msgid.toString());
 			}
 			catch (Throwable e) {
 				log.error("Pulsar Error", e);
