@@ -7,6 +7,7 @@ spring:
 #          issuer-url: https://auth.streamnative.cloud/
 #          private-key: file:///Users/tspann/Downloads/sndevadvocate-tspann.json
 #          audience: urn:sn:pulsar:sndevadvocate:my-instance
+#        service-url: pulsar://72.82.137.252:6650
         service-url: pulsar://pulsar1:6650
       producer:
         batching-enabled: false
@@ -19,6 +20,7 @@ airnowapi:
   airquality-uri: /aq/observation/zipCode/current/?format=application/json&distance=250&zipCode={zipCode}&API_KEY={apiKey}
   api-key: ${API_KEY:}
   zip-codes:
+    - 78701
     - 08520
     - 94027
     - 02199

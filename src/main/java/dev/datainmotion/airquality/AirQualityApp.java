@@ -1,29 +1,24 @@
 package dev.datainmotion.airquality;
 
-import java.util.List;
-import java.util.UUID;
-
 import dev.datainmotion.airquality.model.Observation;
 import dev.datainmotion.airquality.service.AirQualityService;
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.Schema;
-import org.apache.pulsar.client.api.SubscriptionType;
 import org.apache.pulsar.common.schema.SchemaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.pulsar.annotation.PulsarListener;
-import org.springframework.pulsar.autoconfigure.PulsarProperties;
 import org.springframework.pulsar.core.PulsarTemplate;
-import org.springframework.pulsar.core.PulsarTopic;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import static org.apache.pulsar.client.api.SubscriptionType.*;
+import java.util.List;
+import java.util.UUID;
+
+import static org.apache.pulsar.client.api.SubscriptionType.Shared;
 
 /**
  * example spring boot app to read rest feed send to Pulsar
