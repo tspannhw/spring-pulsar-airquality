@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>dev.datainmotion.airquality</groupId>
 	<artifactId>airquality</artifactId>
-	<version>3.0.0</version>
+	<version>3.1.0</version>
 	<name>airquality</name>
 	<description>spring-pulsar-airquality: Air Quality Spring Boot with Spring Pulsar
 	</description>

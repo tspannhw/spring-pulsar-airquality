@@ -14,7 +14,6 @@ public class AirQualityProperties {
 	private final String apiKey;
 	private final List<String> zipCodes;
 
-	@ConstructorBinding
 	public AirQualityProperties(
 			@DefaultValue("http://localhost:${server.port}") String baseUrl,
 			String airqualityUri,

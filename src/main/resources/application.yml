@@ -8,7 +8,8 @@ spring:
 #          private-key: file:///Users/tspann/Downloads/sndevadvocate-tspann.json
 #          audience: urn:sn:pulsar:sndevadvocate:my-instance
 #        service-url: pulsar://72.82.137.252:6650
-        service-url: pulsar://pulsar1:6650
+#        service-url: pulsar://pulsar1:6650
+	service-url: pulsar://localhost:6650
       producer:
         batching-enabled: false
         send-timeout-ms: 90000
