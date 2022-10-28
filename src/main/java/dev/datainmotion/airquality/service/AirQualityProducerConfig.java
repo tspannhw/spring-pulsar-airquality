@@ -41,6 +41,7 @@ public class AirQualityProducerConfig {
             return message;
         }
 
+
         @Override
         public void onSendAcknowledgement(
                 Producer producer, Message message, MessageId msgId, Throwable exception) {
@@ -52,13 +53,11 @@ public class AirQualityProducerConfig {
 
                     if ( schema.isPresent() && !schema.isEmpty()) {
                         JSONSchema<Observation>schemaValue = schema.get();
-
                         schemaName = schemaValue.getSchemaInfo().getSchemaDefinition().toString();
                     }
                 } catch (Exception e) {
                    log.error("Schema Parsing Error", e);
                 }
-
             }
             log.info("Producer: {}, MessageId: {}, Key: {}, Pub Time: {}, Schema: {}, Value: {}",
                     message.getProducerName(),
@@ -69,5 +68,4 @@ public class AirQualityProducerConfig {
                     message.getValue());
         }
     }
-
 }

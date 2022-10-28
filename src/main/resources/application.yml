@@ -9,7 +9,7 @@ spring:
 #          audience: urn:sn:pulsar:sndevadvocate:my-instance
 #        service-url: pulsar://72.82.137.252:6650
 #        service-url: pulsar://pulsar1:6650
-	service-url: pulsar://localhost:6650
+        service-url: pulsar://localhost:6650
       producer:
         batching-enabled: false
         send-timeout-ms: 90000
@@ -51,6 +51,6 @@ logging:
     org.apache.pulsar: error
     root: info
     ROOT: info
-    dev.datainmotion.airquality: info
+    dev.datainmotion.airquality: debug
 
 server.port: 8799
