@@ -4,6 +4,7 @@ import dev.datainmotion.airquality.model.Observation;
 import dev.datainmotion.airquality.service.AirQualityService;
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.Schema;
+import org.apache.pulsar.client.api.SubscriptionType;
 import org.apache.pulsar.common.schema.SchemaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.apache.pulsar.client.api.SubscriptionType.Shared;
+
 
 /**
  * example spring boot app to read rest feed send to Pulsar
@@ -72,18 +74,30 @@ public class AirQualityApp {
 		});
     }
 
-	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
+	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = "Shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
 	void echoObservation(Observation message) {
 		this.log.info("PM2.5 Message received: {}", message);
 	}
 
-	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
+	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = "Shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
 	void echoObservation2(Observation message) {
 		this.log.info("PM10 Message received: {}", message);
 	}
 
-	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
-	void echoObservation3(Observation message) {
+	/**
+	 * pulsar headers
+	 * https://github.com/spring-projects-experimental/spring-pulsar/blob/main/spring-pulsar/src/main/java/org/springframework/pulsar/support/PulsarHeaders.java
+	 * https://docs.spring.io/spring-pulsar/docs/current-SNAPSHOT/reference/html/#pulsar-headers
+	 *, @Header(PulsarHeaders.MESSAGE_ID) MessageId messageId
+	 *
+	 * in upcoming future
+	 *
+	 * @param message
+	 * @param messageId
+	 */
+	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = "Shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
+	void echoObservation3(Observation message)
+	{
 		this.log.info("Ozone Message received: {}", message);
 	}
 }
