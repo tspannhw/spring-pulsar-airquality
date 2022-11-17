@@ -74,12 +74,12 @@ public class AirQualityApp {
 		});
     }
 
-	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = "Shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
+	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
 	void echoObservation(Observation message) {
 		this.log.info("PM2.5 Message received: {}", message);
 	}
 
-	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = "Shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
+	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
 	void echoObservation2(Observation message) {
 		this.log.info("PM10 Message received: {}", message);
 	}
@@ -93,9 +93,8 @@ public class AirQualityApp {
 	 * in upcoming future
 	 *
 	 * @param message
-	 * @param messageId
 	 */
-	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = "Shared", schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
+	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
 	void echoObservation3(Observation message)
 	{
 		this.log.info("Ozone Message received: {}", message);
