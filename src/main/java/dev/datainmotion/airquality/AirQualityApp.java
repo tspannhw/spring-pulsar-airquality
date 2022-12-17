@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import static org.apache.pulsar.client.api.SubscriptionType.Shared;
 
@@ -46,7 +47,7 @@ public class AirQualityApp {
         SpringApplication.run(AirQualityApp.class, args);
     }
 
-	@Scheduled(initialDelay = 10, fixedRate = 10000)
+	@Scheduled(initialDelay = 1000, fixedRate = 1000)
     public void getRows() {
 		this.pulsarTemplate.setSchema(Schema.JSON(Observation.class));
 		List<Observation> observations = airQualityService.fetchCurrentObservation();
@@ -56,17 +57,26 @@ public class AirQualityApp {
         }
         log.debug("Count: {}", observations.size());
 		observations.forEach((observation) -> {
-			log.debug("{}={} for {} {}",
+			log.info("{}={} for {} {}",
 					observation.getParameterName(),
 					observation.getAqi(),
 					observation.getStateCode(),
 					observation.getReportingArea());
 			try {
 				UUID uuidKey = UUID.randomUUID();
+
+				// sync
 				MessageId msgid = pulsarTemplate.newMessage(observation)
 						.withMessageCustomizer((mb) -> mb.key(uuidKey.toString()))
 						.send();
-				log.debug("MSGID Sent: {}", msgid.toString());
+				log.info("MSGID Sent: {}", msgid.toString());
+
+				// async
+//				CompletableFuture<MessageId> msgid = pulsarTemplate.newMessage(observation)
+//						.withMessageCustomizer((mb) -> mb.key(uuidKey.toString()))
+//						.sendAsync();
+//
+//				log.debug("MSGID Sent: {}",msgid.toString().toString() );
 			}
 			catch (Throwable e) {
 				log.error("Pulsar Error", e);
@@ -74,14 +84,19 @@ public class AirQualityApp {
 		});
     }
 
-	@PulsarListener(subscriptionName = "aq-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
-	void echoObservation(Observation message) {
+	@PulsarListener(subscriptionName = "pm25-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm25")
+	public void echoObservation(Observation message) {
 		this.log.info("PM2.5 Message received: {}", message);
 	}
 
+//	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
+//	public void echoObservation2(Observation message) {
+//		this.log.info("PM10 Message received: {}", message);
+//	}
+
 	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
-	void echoObservation2(Observation message) {
-		this.log.info("PM10 Message received: {}", message);
+	public void echoObservation2(org.springframework.messaging.Message<Observation> message) {
+		this.log.info("PM10 Payload:"+ message.getPayload().toString() + " PM10 Headers:" + message.getHeaders().toString());
 	}
 
 	/**
@@ -94,9 +109,14 @@ public class AirQualityApp {
 	 *
 	 * @param message
 	 */
-	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
-	void echoObservation3(Observation message)
-	{
-		this.log.info("Ozone Message received: {}", message);
+//	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
+//	public void echoObservation3(Observation message)
+//	{
+//		this.log.info("Ozone Message received: {}", message);
+//	}
+
+	@PulsarListener(subscriptionName = "my-ozone-spring-m1", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
+	public void listen(org.springframework.messaging.Message<Observation> message) {
+		this.log.info("Ozone Payload:"+ message.getPayload().toString() + " Ozone Headers:" + message.getHeaders().toString());
 	}
 }

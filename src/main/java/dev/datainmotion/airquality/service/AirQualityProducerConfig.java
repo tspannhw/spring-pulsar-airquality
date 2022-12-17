@@ -59,7 +59,7 @@ public class AirQualityProducerConfig {
                    log.error("Schema Parsing Error", e);
                 }
             }
-            log.info("Producer: {}, MessageId: {}, Key: {}, Pub Time: {}, Schema: {}, Value: {}",
+            log.info("====Ack Producer: {}, MessageId: {}, Key: {}, Pub Time: {}, Schema: {}, Value: {}",
                     message.getProducerName(),
                     message.getMessageId(),
                     message.getKey(),

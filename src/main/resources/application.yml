@@ -11,9 +11,8 @@ spring:
 #        service-url: pulsar://pulsar1:6650
         service-url: pulsar://localhost:6650
       producer:
-        batching-enabled: false
-        send-timeout-ms: 90000
-        producer-name: airqualityspringboot
+        send-timeout-ms: 20000
+#        producer-name: airqualityspringbootm1
         topic-name: persistent://public/default/airquality
 
 airnowapi:
@@ -50,6 +49,6 @@ logging:
     org.apache.pulsar: error
     root: info
     ROOT: info
-    dev.datainmotion.airquality: debug
+    dev.datainmotion.airquality: info
 
 server.port: 8799
