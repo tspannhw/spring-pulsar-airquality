@@ -234,10 +234,6 @@ set table.dynamic-table-options.enabled = true;
 
 use `public/default`;
 
-show tables;
-
-describe aircraft;
-
 SHOW TABLES;
 
 Flink SQL> describe airquality;
