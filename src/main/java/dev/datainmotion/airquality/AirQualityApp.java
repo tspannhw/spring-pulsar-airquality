@@ -89,31 +89,10 @@ public class AirQualityApp {
 		this.log.info("PM2.5 Message received: {}", message);
 	}
 
-//	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
-//	public void echoObservation2(Observation message) {
-//		this.log.info("PM10 Message received: {}", message);
-//	}
-
 	@PulsarListener(subscriptionName = "pm10-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-pm10")
 	public void echoObservation2(org.springframework.messaging.Message<Observation> message) {
 		this.log.info("PM10 Payload:"+ message.getPayload().toString() + " PM10 Headers:" + message.getHeaders().toString());
 	}
-
-	/**
-	 * pulsar headers
-	 * https://github.com/spring-projects-experimental/spring-pulsar/blob/main/spring-pulsar/src/main/java/org/springframework/pulsar/support/PulsarHeaders.java
-	 * https://docs.spring.io/spring-pulsar/docs/current-SNAPSHOT/reference/html/#pulsar-headers
-	 *, @Header(PulsarHeaders.MESSAGE_ID) MessageId messageId
-	 *
-	 * in upcoming future
-	 *
-	 * @param message
-	 */
-//	@PulsarListener(subscriptionName = "ozone-spring-reader", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
-//	public void echoObservation3(Observation message)
-//	{
-//		this.log.info("Ozone Message received: {}", message);
-//	}
 
 	@PulsarListener(subscriptionName = "my-ozone-spring-m1", subscriptionType = Shared, schemaType = SchemaType.JSON, topics = "persistent://public/default/aq-ozone")
 	public void listen(org.springframework.messaging.Message<Observation> message) {
