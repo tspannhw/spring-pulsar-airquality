@@ -220,13 +220,23 @@ export AIRPORTNOWAPIURL="https://www.airnowapi.org/aq/observation/zipCode/curren
 
 ````
 CREATE CATALOG pulsar WITH (
-   'type' = 'pulsar',
-   'service-url' = 'pulsar://localhost:6650',
-   'admin-url' = 'http://localhost:8080',
-   'format' = 'json'
+   'type' = 'pulsar-catalog',
+   'catalog-service-url' = 'pulsar://localhost:6650',
+   'catalog-admin-url' = 'http://localhost:8080'
 );
 
 USE CATALOG pulsar;
+
+SHOW CURRENT DATABASE;
+SHOW DATABASES;
+
+set table.dynamic-table-options.enabled = true;
+
+use `public/default`;
+
+show tables;
+
+describe aircraft;
 
 SHOW TABLES;
 
